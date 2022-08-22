@@ -1,9 +1,8 @@
 #  Linux Rsyslog disk write improvement [SONiC]
-
 # Table of Contents
-- [ 1. Linux logging system:](##Linux-logging-system)
-- [2. Observation](#2-observation)
-
+- [Linux logging system](https://github.com/praveen-li/equilibrium/blob/main/rsyslog/rsyslog_config.md#linux-logging-system)
+- [Rsyslogd](https://github.com/praveen-li/equilibrium/blob/main/rsyslog/rsyslog_config.md#rsyslogd)
+- [Testing](https://github.com/praveen-li/equilibrium/blob/main/rsyslog/rsyslog_config.md#testing:)
 
 ## Linux logging system:
 Below diagram depicts the components involved in Linux logging,
