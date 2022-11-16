@@ -1,0 +1,49 @@
+{
+    "module": {
+        "@name": "sonic-versions", 
+        "@xmlns": "urn:ietf:params:xml:ns:yang:yin:1", 
+        "@xmlns:versions": "http://github.com/Azure/sonic-versions", 
+        "yang-version": {
+            "@value": "1.1"
+        }, 
+        "namespace": {
+            "@uri": "http://github.com/Azure/sonic-versions"
+        }, 
+        "prefix": {
+            "@value": "versions"
+        }, 
+        "description": {
+            "text": "VERSIONS YANG Module for SONiC OS"
+        }, 
+        "revision": {
+            "@date": "2020-04-10", 
+            "description": {
+                "text": "First Revision"
+            }
+        }, 
+        "container": {
+            "@name": "sonic-versions", 
+            "container": {
+                "@name": "VERSIONS", 
+                "description": {
+                    "text": "VERSIONS part of config_db.json"
+                }, 
+                "container": {
+                    "@name": "DATABASE", 
+                    "leaf": {
+                        "@name": "VERSION", 
+                        "type": {
+                            "@name": "string", 
+                            "length": {
+                                "@value": "1..255"
+                            }, 
+                            "pattern": {
+                                "@value": "version_([0-9]{1,2})_([0-9]{1,2})_([0-9]{1,2})"
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

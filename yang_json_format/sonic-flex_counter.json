@@ -1,0 +1,95 @@
+{
+    "module": {
+        "@name": "sonic-flex_counter", 
+        "@xmlns": "urn:ietf:params:xml:ns:yang:yin:1", 
+        "@xmlns:flex_counter": "http://github.com/Azure/sonic-flex_counter", 
+        "yang-version": {
+            "@value": "1.1"
+        }, 
+        "namespace": {
+            "@uri": "http://github.com/Azure/sonic-flex_counter"
+        }, 
+        "prefix": {
+            "@value": "flex_counter"
+        }, 
+        "description": {
+            "text": "FLEX COUNTER YANG Module for SONiC OS"
+        }, 
+        "revision": {
+            "@date": "2020-04-10", 
+            "description": {
+                "text": "First Revision"
+            }
+        }, 
+        "container": {
+            "@name": "sonic-flex_counter", 
+            "container": {
+                "@name": "FLEX_COUNTER_TABLE", 
+                "description": {
+                    "text": "FLEX_COUNTER_TABLE part of config_db.json"
+                }, 
+                "typedef": {
+                    "@name": "flex_status", 
+                    "type": {
+                        "@name": "enumeration", 
+                        "enum": [
+                            {
+                                "@name": "enable"
+                            }, 
+                            {
+                                "@name": "disable"
+                            }
+                        ]
+                    }
+                }, 
+                "container": [
+                    {
+                        "@name": "PFCWD", 
+                        "leaf": {
+                            "@name": "FLEX_COUNTER_STATUS", 
+                            "type": {
+                                "@name": "flex_status"
+                            }
+                        }
+                    }, 
+                    {
+                        "@name": "PORT", 
+                        "leaf": {
+                            "@name": "FLEX_COUNTER_STATUS", 
+                            "type": {
+                                "@name": "flex_status"
+                            }
+                        }
+                    }, 
+                    {
+                        "@name": "QUEUE", 
+                        "leaf": {
+                            "@name": "FLEX_COUNTER_STATUS", 
+                            "type": {
+                                "@name": "flex_status"
+                            }
+                        }
+                    }, 
+                    {
+                        "@name": "PG_WATERMARK", 
+                        "leaf": {
+                            "@name": "FLEX_COUNTER_STATUS", 
+                            "type": {
+                                "@name": "flex_status"
+                            }
+                        }
+                    }, 
+                    {
+                        "@name": "QUEUE_WATERMARK", 
+                        "leaf": {
+                            "@name": "FLEX_COUNTER_STATUS", 
+                            "type": {
+                                "@name": "flex_status"
+                            }
+                        }
+                    }
+                ]
+            }
+        }
+    }
+}

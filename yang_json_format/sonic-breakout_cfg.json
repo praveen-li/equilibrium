@@ -1,0 +1,76 @@
+{
+    "module": {
+        "@name": "sonic-breakout_cfg", 
+        "@xmlns": "urn:ietf:params:xml:ns:yang:yin:1", 
+        "@xmlns:breakout_cfg": "http://github.com/Azure/sonic-breakout_cfg", 
+        "@xmlns:ext": "http://github.com/Azure/sonic-extension", 
+        "yang-version": {
+            "@value": "1.1"
+        }, 
+        "namespace": {
+            "@uri": "http://github.com/Azure/sonic-breakout_cfg"
+        }, 
+        "prefix": {
+            "@value": "breakout_cfg"
+        }, 
+        "import": {
+            "@module": "sonic-extension", 
+            "prefix": {
+                "@value": "ext"
+            }, 
+            "revision-date": {
+                "@date": "2019-07-01"
+            }
+        }, 
+        "description": {
+            "text": "BREAKOUT_CFG YANG Module for SONiC OS"
+        }, 
+        "revision": {
+            "@date": "2020-04-10", 
+            "description": {
+                "text": "First Revision"
+            }
+        }, 
+        "container": {
+            "@name": "sonic-breakout_cfg", 
+            "container": {
+                "@name": "BREAKOUT_CFG", 
+                "description": {
+                    "text": "BREAKOUT_CFG part of config_db.json"
+                }, 
+                "list": {
+                    "@name": "BREAKOUT_CFG_LIST", 
+                    "ext:key-regex-configdb-to-yang": {
+                        "@value": "^([a-zA-Z0-9_-]+)$"
+                    }, 
+                    "ext:key-regex-yang-to-configdb": {
+                        "@value": "<port>"
+                    }, 
+                    "key": {
+                        "@value": "port"
+                    }, 
+                    "leaf": [
+                        {
+                            "@name": "port", 
+                            "type": {
+                                "@name": "string", 
+                                "length": {
+                                    "@value": "1..255"
+                                }
+                            }
+                        }, 
+                        {
+                            "@name": "brkout_mode", 
+                            "type": {
+                                "@name": "string", 
+                                "length": {
+                                    "@value": "1..64"
+                                }
+                            }
+                        }
+                    ]
+                }
+            }
+        }
+    }
+}

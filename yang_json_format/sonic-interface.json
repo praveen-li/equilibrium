@@ -1,0 +1,181 @@
+{
+    "module": {
+        "@name": "sonic-interface", 
+        "@xmlns": "urn:ietf:params:xml:ns:yang:yin:1", 
+        "@xmlns:intf": "http://github.com/Azure/sonic-interface", 
+        "@xmlns:stypes": "http://github.com/Azure/sonic-head", 
+        "@xmlns:ext": "http://github.com/Azure/sonic-extension", 
+        "@xmlns:port": "http://github.com/Azure/sonic-port", 
+        "yang-version": {
+            "@value": "1.1"
+        }, 
+        "namespace": {
+            "@uri": "http://github.com/Azure/sonic-interface"
+        }, 
+        "prefix": {
+            "@value": "intf"
+        }, 
+        "import": [
+            {
+                "@module": "sonic-types", 
+                "prefix": {
+                    "@value": "stypes"
+                }, 
+                "revision-date": {
+                    "@date": "2019-07-01"
+                }
+            }, 
+            {
+                "@module": "sonic-extension", 
+                "prefix": {
+                    "@value": "ext"
+                }, 
+                "revision-date": {
+                    "@date": "2019-07-01"
+                }
+            }, 
+            {
+                "@module": "sonic-port", 
+                "prefix": {
+                    "@value": "port"
+                }, 
+                "revision-date": {
+                    "@date": "2019-07-01"
+                }
+            }
+        ], 
+        "organization": {
+            "text": "Linkedin Corporation"
+        }, 
+        "contact": {
+            "text": "lnos_coders@linkedin.com"
+        }, 
+        "description": {
+            "text": "INTERFACE yang Module for SONiC OS"
+        }, 
+        "revision": {
+            "@date": "2019-07-01", 
+            "description": {
+                "text": "First Revision"
+            }
+        }, 
+        "container": {
+            "@name": "sonic-interface", 
+            "container": {
+                "@name": "INTERFACE", 
+                "description": {
+                    "text": "INTERFACE part of config_db.json"
+                }, 
+                "list": [
+                    {
+                        "@name": "INTERFACE_LIST", 
+                        "ext:key-regex-configdb-to-yang": {
+                            "@value": "^(Ethernet[0-9]+)$"
+                        }, 
+                        "ext:key-regex-yang-to-configdb": {
+                            "@value": "<port_name>"
+                        }, 
+                        "key": {
+                            "@value": "port_name"
+                        }, 
+                        "description": {
+                            "text": "INTERFACE part of config_db.json with vrf"
+                        }, 
+                        "leaf": [
+                            {
+                                "@name": "port_name", 
+                                "type": {
+                                    "@name": "leafref", 
+                                    "path": {
+                                        "@value": "/port:sonic-port/port:PORT/port:PORT_LIST/port:port_name"
+                                    }
+                                }
+                            }, 
+                            {
+                                "@name": "vrf_name", 
+                                "type": {
+                                    "@name": "string", 
+                                    "length": {
+                                        "@value": "3..255"
+                                    }, 
+                                    "pattern": {
+                                        "@value": "Vrf[a-zA-Z0-9_-]+"
+                                    }
+                                }
+                            }
+                        ]
+                    }, 
+                    {
+                        "@name": "INTERFACE_IPPREFIX_LIST", 
+                        "ext:key-regex-configdb-to-yang": {
+                            "@value": "^(Ethernet[0-9]+)|([a-fA-F0-9:./]+)$"
+                        }, 
+                        "ext:key-regex-yang-to-configdb": {
+                            "@value": "<port_name>|<ip-prefix>"
+                        }, 
+                        "key": {
+                            "@value": "port_name ip-prefix"
+                        }, 
+                        "description": {
+                            "text": "INTERFACE part of config_db.json with ip-prefix"
+                        }, 
+                        "leaf": [
+                            {
+                                "@name": "port_name", 
+                                "type": {
+                                    "@name": "leafref", 
+                                    "path": {
+                                        "@value": "/port:sonic-port/port:PORT/port:PORT_LIST/port:port_name"
+                                    }
+                                }, 
+                                "must": {
+                                    "@condition": "(current() = ../../INTERFACE_LIST[port_name=current()]/port_name)", 
+                                    "error-message": {
+                                        "value": "Must condition not satisfied, Try adding PORT: {}, Example: 'Ethernet0': {}"
+                                    }
+                                }
+                            }, 
+                            {
+                                "@name": "ip-prefix", 
+                                "type": {
+                                    "@name": "union", 
+                                    "type": [
+                                        {
+                                            "@name": "stypes:sonic-ip4-prefix"
+                                        }, 
+                                        {
+                                            "@name": "stypes:sonic-ip6-prefix"
+                                        }
+                                    ]
+                                }
+                            }, 
+                            {
+                                "@name": "scope", 
+                                "type": {
+                                    "@name": "enumeration", 
+                                    "enum": [
+                                        {
+                                            "@name": "global"
+                                        }, 
+                                        {
+                                            "@name": "local"
+                                        }
+                                    ]
+                                }
+                            }, 
+                            {
+                                "@name": "family", 
+                                "type": {
+                                    "@name": "stypes:ip-family"
+                                }, 
+                                "must": {
+                                    "@condition": "(contains(../ip-prefix, ':') and current()='IPv6') or         (contains(../ip-prefix, '.') and current()='IPv4')"
+                                }
+                            }
+                        ]
+                    }
+                ]
+            }
+        }
+    }
+}

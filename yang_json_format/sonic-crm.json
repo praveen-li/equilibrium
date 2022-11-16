@@ -1,0 +1,334 @@
+{
+    "module": {
+        "@name": "sonic-crm", 
+        "@xmlns": "urn:ietf:params:xml:ns:yang:yin:1", 
+        "@xmlns:crm": "http://github.com/Azure/sonic-crm", 
+        "@xmlns:stypes": "http://github.com/Azure/sonic-head", 
+        "yang-version": {
+            "@value": "1.1"
+        }, 
+        "namespace": {
+            "@uri": "http://github.com/Azure/sonic-crm"
+        }, 
+        "prefix": {
+            "@value": "crm"
+        }, 
+        "import": {
+            "@module": "sonic-types", 
+            "prefix": {
+                "@value": "stypes"
+            }, 
+            "revision-date": {
+                "@date": "2019-07-01"
+            }
+        }, 
+        "description": {
+            "text": "BREAKOUT_CFG YANG Module for SONiC OS"
+        }, 
+        "revision": {
+            "@date": "2020-04-10", 
+            "description": {
+                "text": "First Revision"
+            }
+        }, 
+        "container": {
+            "@name": "sonic-crm", 
+            "container": {
+                "@name": "CRM", 
+                "description": {
+                    "text": "CRM part of config_db.json"
+                }, 
+                "container": {
+                    "@name": "Config", 
+                    "typedef": {
+                        "@name": "threshold", 
+                        "type": {
+                            "@name": "uint16"
+                        }
+                    }, 
+                    "leaf": [
+                        {
+                            "@name": "acl_counter_threshold_type", 
+                            "type": {
+                                "@name": "stypes:crm_threshold_type"
+                            }, 
+                            "must": {
+                                "@condition": "(((current()='PERCENTAGE' or current()='percentage') and ../acl_counter_high_threshold<100 and ../acl_counter_low_threshold<100) or (current()!='PERCENTAGE' and current()!='percentage'))"
+                            }
+                        }, 
+                        {
+                            "@name": "acl_counter_high_threshold", 
+                            "type": {
+                                "@name": "threshold"
+                            }
+                        }, 
+                        {
+                            "@name": "acl_counter_low_threshold", 
+                            "type": {
+                                "@name": "threshold"
+                            }
+                        }, 
+                        {
+                            "@name": "acl_group_threshold_type", 
+                            "type": {
+                                "@name": "stypes:crm_threshold_type"
+                            }, 
+                            "must": {
+                                "@condition": "(((current()='PERCENTAGE' or current()='percentage') and ../acl_group_high_threshold<100 and ../acl_group_low_threshold<100) or (current()!='PERCENTAGE' and current()!='percentage'))"
+                            }
+                        }, 
+                        {
+                            "@name": "acl_group_high_threshold", 
+                            "type": {
+                                "@name": "threshold"
+                            }
+                        }, 
+                        {
+                            "@name": "acl_group_low_threshold", 
+                            "type": {
+                                "@name": "threshold"
+                            }
+                        }, 
+                        {
+                            "@name": "acl_entry_threshold_type", 
+                            "type": {
+                                "@name": "stypes:crm_threshold_type"
+                            }, 
+                            "must": {
+                                "@condition": "(((current()='PERCENTAGE' or current()='percentage') and ../acl_entry_high_threshold<100 and ../acl_entry_low_threshold<100) or (current()!='PERCENTAGE' and current()!='percentage'))"
+                            }
+                        }, 
+                        {
+                            "@name": "acl_entry_high_threshold", 
+                            "type": {
+                                "@name": "threshold"
+                            }
+                        }, 
+                        {
+                            "@name": "acl_entry_low_threshold", 
+                            "type": {
+                                "@name": "threshold"
+                            }
+                        }, 
+                        {
+                            "@name": "acl_table_threshold_type", 
+                            "type": {
+                                "@name": "stypes:crm_threshold_type"
+                            }, 
+                            "must": {
+                                "@condition": "(((current()='PERCENTAGE' or current()='percentage') and ../acl_table_high_threshold<100 and ../acl_table_low_threshold<100) or (current()!='PERCENTAGE' and current()!='percentage'))"
+                            }
+                        }, 
+                        {
+                            "@name": "acl_table_high_threshold", 
+                            "type": {
+                                "@name": "threshold"
+                            }
+                        }, 
+                        {
+                            "@name": "acl_table_low_threshold", 
+                            "type": {
+                                "@name": "threshold"
+                            }
+                        }, 
+                        {
+                            "@name": "fdb_entry_threshold_type", 
+                            "type": {
+                                "@name": "stypes:crm_threshold_type"
+                            }, 
+                            "must": {
+                                "@condition": "(((current()='PERCENTAGE' or current()='percentage') and ../fdb_entry_high_threshold<100 and ../fdb_entry_low_threshold<100) or (current()!='PERCENTAGE' and current()!='percentage'))"
+                            }
+                        }, 
+                        {
+                            "@name": "fdb_entry_high_threshold", 
+                            "type": {
+                                "@name": "threshold"
+                            }
+                        }, 
+                        {
+                            "@name": "fdb_entry_low_threshold", 
+                            "type": {
+                                "@name": "threshold"
+                            }
+                        }, 
+                        {
+                            "@name": "ipv4_neighbor_threshold_type", 
+                            "type": {
+                                "@name": "stypes:crm_threshold_type"
+                            }, 
+                            "must": {
+                                "@condition": "(((current()='PERCENTAGE' or current()='percentage') and ../ipv4_neighbor_high_threshold<100 and ../ipv4_neighbor_low_threshold<100) or (current()!='PERCENTAGE' and current()!='percentage'))"
+                            }
+                        }, 
+                        {
+                            "@name": "ipv4_neighbor_high_threshold", 
+                            "type": {
+                                "@name": "threshold"
+                            }
+                        }, 
+                        {
+                            "@name": "ipv4_neighbor_low_threshold", 
+                            "type": {
+                                "@name": "threshold"
+                            }
+                        }, 
+                        {
+                            "@name": "ipv4_nexthop_threshold_type", 
+                            "type": {
+                                "@name": "stypes:crm_threshold_type"
+                            }, 
+                            "must": {
+                                "@condition": "(((current()='PERCENTAGE' or current()='percentage') and ../ipv4_nexthop_high_threshold<100 and ../ipv4_nexthop_low_threshold<100) or (current()!='PERCENTAGE' and current()!='percentage'))"
+                            }
+                        }, 
+                        {
+                            "@name": "ipv4_nexthop_high_threshold", 
+                            "type": {
+                                "@name": "threshold"
+                            }
+                        }, 
+                        {
+                            "@name": "ipv4_nexthop_low_threshold", 
+                            "type": {
+                                "@name": "threshold"
+                            }
+                        }, 
+                        {
+                            "@name": "ipv4_route_threshold_type", 
+                            "type": {
+                                "@name": "stypes:crm_threshold_type"
+                            }, 
+                            "must": {
+                                "@condition": "(((current()='PERCENTAGE' or current()='percentage') and ../ipv4_route_high_threshold<100 and ../ipv4_route_low_threshold<100) or (current()!='PERCENTAGE' and current()!='percentage'))"
+                            }
+                        }, 
+                        {
+                            "@name": "ipv4_route_high_threshold", 
+                            "type": {
+                                "@name": "threshold"
+                            }
+                        }, 
+                        {
+                            "@name": "ipv4_route_low_threshold", 
+                            "type": {
+                                "@name": "threshold"
+                            }
+                        }, 
+                        {
+                            "@name": "ipv6_neighbor_threshold_type", 
+                            "type": {
+                                "@name": "stypes:crm_threshold_type"
+                            }, 
+                            "must": {
+                                "@condition": "(((current()='PERCENTAGE' or current()='percentage') and ../ipv6_neighbor_high_threshold<100 and ../ipv6_neighbor_low_threshold<100) or (current()!='PERCENTAGE' and current()!='percentage'))"
+                            }
+                        }, 
+                        {
+                            "@name": "ipv6_neighbor_high_threshold", 
+                            "type": {
+                                "@name": "threshold"
+                            }
+                        }, 
+                        {
+                            "@name": "ipv6_neighbor_low_threshold", 
+                            "type": {
+                                "@name": "threshold"
+                            }
+                        }, 
+                        {
+                            "@name": "ipv6_nexthop_threshold_type", 
+                            "type": {
+                                "@name": "stypes:crm_threshold_type"
+                            }, 
+                            "must": {
+                                "@condition": "(((current()='PERCENTAGE' or current()='percentage') and ../ipv6_nexthop_high_threshold<100 and ../ipv6_nexthop_low_threshold<100) or (current()!='PERCENTAGE' and current()!='percentage'))"
+                            }
+                        }, 
+                        {
+                            "@name": "ipv6_nexthop_high_threshold", 
+                            "type": {
+                                "@name": "threshold"
+                            }
+                        }, 
+                        {
+                            "@name": "ipv6_nexthop_low_threshold", 
+                            "type": {
+                                "@name": "threshold"
+                            }
+                        }, 
+                        {
+                            "@name": "ipv6_route_threshold_type", 
+                            "type": {
+                                "@name": "stypes:crm_threshold_type"
+                            }, 
+                            "must": {
+                                "@condition": "(((current()='PERCENTAGE' or current()='percentage') and ../ipv6_route_high_threshold<100 and ../ipv6_route_low_threshold<100) or (current()!='PERCENTAGE' and current()!='percentage'))"
+                            }
+                        }, 
+                        {
+                            "@name": "ipv6_route_high_threshold", 
+                            "type": {
+                                "@name": "threshold"
+                            }
+                        }, 
+                        {
+                            "@name": "ipv6_route_low_threshold", 
+                            "type": {
+                                "@name": "threshold"
+                            }
+                        }, 
+                        {
+                            "@name": "nexthop_group_threshold_type", 
+                            "type": {
+                                "@name": "stypes:crm_threshold_type"
+                            }, 
+                            "must": {
+                                "@condition": "(((current()='PERCENTAGE' or current()='percentage') and ../nexthop_group_high_threshold<100 and ../nexthop_group_low_threshold<100) or (current()!='PERCENTAGE' and current()!='percentage'))"
+                            }
+                        }, 
+                        {
+                            "@name": "nexthop_group_high_threshold", 
+                            "type": {
+                                "@name": "threshold"
+                            }
+                        }, 
+                        {
+                            "@name": "nexthop_group_low_threshold", 
+                            "type": {
+                                "@name": "threshold"
+                            }
+                        }, 
+                        {
+                            "@name": "nexthop_group_member_threshold_type", 
+                            "type": {
+                                "@name": "stypes:crm_threshold_type"
+                            }, 
+                            "must": {
+                                "@condition": "(((current()='PERCENTAGE' or current()='percentage') and ../nexthop_group_member_high_threshold<100 and ../nexthop_group_member_low_threshold<100) or (current()!='PERCENTAGE' and current()!='percentage'))"
+                            }
+                        }, 
+                        {
+                            "@name": "nexthop_group_member_high_threshold", 
+                            "type": {
+                                "@name": "threshold"
+                            }
+                        }, 
+                        {
+                            "@name": "nexthop_group_member_low_threshold", 
+                            "type": {
+                                "@name": "threshold"
+                            }
+                        }, 
+                        {
+                            "@name": "polling_interval", 
+                            "type": {
+                                "@name": "threshold"
+                            }
+                        }
+                    ]
+                }
+            }
+        }
+    }
+}

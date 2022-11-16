@@ -1,0 +1,128 @@
+{
+    "module": {
+        "@name": "sonic-device_neighbor", 
+        "@xmlns": "urn:ietf:params:xml:ns:yang:yin:1", 
+        "@xmlns:device_neighbor": "http://github.com/Azure/sonic-device_neighbor", 
+        "@xmlns:inet": "urn:ietf:params:xml:ns:yang:ietf-inet-types", 
+        "@xmlns:ext": "http://github.com/Azure/sonic-extension", 
+        "@xmlns:port": "http://github.com/Azure/sonic-port", 
+        "yang-version": {
+            "@value": "1.1"
+        }, 
+        "namespace": {
+            "@uri": "http://github.com/Azure/sonic-device_neighbor"
+        }, 
+        "prefix": {
+            "@value": "device_neighbor"
+        }, 
+        "import": [
+            {
+                "@module": "ietf-inet-types", 
+                "prefix": {
+                    "@value": "inet"
+                }
+            }, 
+            {
+                "@module": "sonic-extension", 
+                "prefix": {
+                    "@value": "ext"
+                }, 
+                "revision-date": {
+                    "@date": "2019-07-01"
+                }
+            }, 
+            {
+                "@module": "sonic-port", 
+                "prefix": {
+                    "@value": "port"
+                }, 
+                "revision-date": {
+                    "@date": "2019-07-01"
+                }
+            }
+        ], 
+        "description": {
+            "text": "DEVICE_NEIGHBOR YANG Module for SONiC OS"
+        }, 
+        "revision": {
+            "@date": "2020-04-10", 
+            "description": {
+                "text": "First Revision"
+            }
+        }, 
+        "container": {
+            "@name": "sonic-device_neighbor", 
+            "container": {
+                "@name": "DEVICE_NEIGHBOR", 
+                "description": {
+                    "text": "DEVICE_NEIGHBOR part of config_db.json"
+                }, 
+                "list": {
+                    "@name": "DEVICE_NEIGHBOR_LIST", 
+                    "ext:key-regex-configdb-to-yang": {
+                        "@value": "^([a-zA-Z0-9_-]+)$"
+                    }, 
+                    "ext:key-regex-yang-to-configdb": {
+                        "@value": "<peer_name>"
+                    }, 
+                    "key": {
+                        "@value": "peer_name"
+                    }, 
+                    "leaf": [
+                        {
+                            "@name": "peer_name", 
+                            "type": {
+                                "@name": "string", 
+                                "length": {
+                                    "@value": "1..255"
+                                }
+                            }
+                        }, 
+                        {
+                            "@name": "name", 
+                            "type": {
+                                "@name": "string", 
+                                "length": {
+                                    "@value": "1..255"
+                                }
+                            }
+                        }, 
+                        {
+                            "@name": "mgmt_addr", 
+                            "type": {
+                                "@name": "inet:ip-address"
+                            }
+                        }, 
+                        {
+                            "@name": "local_port", 
+                            "type": {
+                                "@name": "leafref", 
+                                "path": {
+                                    "@value": "/port:sonic-port/port:PORT/port:PORT_LIST/port:port_name"
+                                }
+                            }
+                        }, 
+                        {
+                            "@name": "port", 
+                            "type": {
+                                "@name": "string", 
+                                "length": {
+                                    "@value": "1..255"
+                                }
+                            }
+                        }, 
+                        {
+                            "@name": "type", 
+                            "type": {
+                                "@name": "string", 
+                                "length": {
+                                    "@value": "1..255"
+                                }
+                            }
+                        }
+                    ]
+                }
+            }
+        }
+    }
+}

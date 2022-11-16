@@ -1,0 +1,153 @@
+{
+    "module": {
+        "@name": "sonic-device_metadata", 
+        "@xmlns": "urn:ietf:params:xml:ns:yang:yin:1", 
+        "@xmlns:device_metadata": "http://github.com/Azure/sonic-device_metadata", 
+        "@xmlns:yang": "urn:ietf:params:xml:ns:yang:ietf-yang-types", 
+        "@xmlns:inet": "urn:ietf:params:xml:ns:yang:ietf-inet-types", 
+        "@xmlns:stypes": "http://github.com/Azure/sonic-head", 
+        "yang-version": {
+            "@value": "1.1"
+        }, 
+        "namespace": {
+            "@uri": "http://github.com/Azure/sonic-device_metadata"
+        }, 
+        "prefix": {
+            "@value": "device_metadata"
+        }, 
+        "import": [
+            {
+                "@module": "ietf-yang-types", 
+                "prefix": {
+                    "@value": "yang"
+                }
+            }, 
+            {
+                "@module": "ietf-inet-types", 
+                "prefix": {
+                    "@value": "inet"
+                }
+            }, 
+            {
+                "@module": "sonic-types", 
+                "prefix": {
+                    "@value": "stypes"
+                }, 
+                "revision-date": {
+                    "@date": "2019-07-01"
+                }
+            }
+        ], 
+        "description": {
+            "text": "DEVICE_METADATA YANG Module for SONiC OS"
+        }, 
+        "revision": {
+            "@date": "2020-04-10", 
+            "description": {
+                "text": "First Revision"
+            }
+        }, 
+        "container": {
+            "@name": "sonic-device_metadata", 
+            "container": {
+                "@name": "DEVICE_METADATA", 
+                "description": {
+                    "text": "DEVICE_METADATA part of config_db.json"
+                }, 
+                "container": {
+                    "@name": "localhost", 
+                    "leaf": [
+                        {
+                            "@name": "hwsku", 
+                            "type": {
+                                "@name": "stypes:hwsku"
+                            }
+                        }, 
+                        {
+                            "@name": "default_bgp_status", 
+                            "type": {
+                                "@name": "enumeration", 
+                                "enum": [
+                                    {
+                                        "@name": "up"
+                                    }, 
+                                    {
+                                        "@name": "down"
+                                    }
+                                ]
+                            }
+                        }, 
+                        {
+                            "@name": "docker_routing_config_mode", 
+                            "type": {
+                                "@name": "string", 
+                                "pattern": {
+                                    "@value": "unified|split|separated"
+                                }
+                            }
+                        }, 
+                        {
+                            "@name": "hostname", 
+                            "type": {
+                                "@name": "string", 
+                                "length": {
+                                    "@value": "1..255"
+                                }
+                            }
+                        }, 
+                        {
+                            "@name": "platform", 
+                            "type": {
+                                "@name": "string", 
+                                "length": {
+                                    "@value": "1..255"
+                                }
+                            }
+                        }, 
+                        {
+                            "@name": "mac", 
+                            "type": {
+                                "@name": "yang:mac-address"
+                            }
+                        }, 
+                        {
+                            "@name": "default_pfcwd_status", 
+                            "type": {
+                                "@name": "enumeration", 
+                                "enum": [
+                                    {
+                                        "@name": "disable"
+                                    }, 
+                                    {
+                                        "@name": "enable"
+                                    }
+                                ]
+                            }
+                        }, 
+                        {
+                            "@name": "bgp_asn", 
+                            "type": {
+                                "@name": "inet:as-number"
+                            }
+                        }, 
+                        {
+                            "@name": "deployment_id", 
+                            "type": {
+                                "@name": "uint32"
+                            }
+                        }, 
+                        {
+                            "@name": "type", 
+                            "type": {
+                                "@name": "string", 
+                                "length": {
+                                    "@value": "1..255"
+                                }
+                            }
+                        }
+                    ]
+                }
+            }
+        }
+    }
+}

@@ -1,0 +1,302 @@
+{
+    "module": {
+        "@name": "sonic-vlan", 
+        "@xmlns": "urn:ietf:params:xml:ns:yang:yin:1", 
+        "@xmlns:vlan": "http://github.com/Azure/sonic-vlan", 
+        "@xmlns:inet": "urn:ietf:params:xml:ns:yang:ietf-inet-types", 
+        "@xmlns:stypes": "http://github.com/Azure/sonic-head", 
+        "@xmlns:ext": "http://github.com/Azure/sonic-extension", 
+        "@xmlns:port": "http://github.com/Azure/sonic-port", 
+        "yang-version": {
+            "@value": "1.1"
+        }, 
+        "namespace": {
+            "@uri": "http://github.com/Azure/sonic-vlan"
+        }, 
+        "prefix": {
+            "@value": "vlan"
+        }, 
+        "import": [
+            {
+                "@module": "ietf-inet-types", 
+                "prefix": {
+                    "@value": "inet"
+                }
+            }, 
+            {
+                "@module": "sonic-types", 
+                "prefix": {
+                    "@value": "stypes"
+                }, 
+                "revision-date": {
+                    "@date": "2019-07-01"
+                }
+            }, 
+            {
+                "@module": "sonic-extension", 
+                "prefix": {
+                    "@value": "ext"
+                }, 
+                "revision-date": {
+                    "@date": "2019-07-01"
+                }
+            }, 
+            {
+                "@module": "sonic-port", 
+                "prefix": {
+                    "@value": "port"
+                }, 
+                "revision-date": {
+                    "@date": "2019-07-01"
+                }
+            }
+        ], 
+        "organization": {
+            "text": "Linkedin Corporation"
+        }, 
+        "contact": {
+            "text": "lnos_coders@linkedin.com"
+        }, 
+        "description": {
+            "text": "VLAN yang Module for SONiC OS"
+        }, 
+        "revision": {
+            "@date": "2019-07-01", 
+            "description": {
+                "text": "First Revision"
+            }
+        }, 
+        "container": {
+            "@name": "sonic-vlan", 
+            "container": [
+                {
+                    "@name": "VLAN_INTERFACE", 
+                    "description": {
+                        "text": "VLAN_INTERFACE part of config_db.json"
+                    }, 
+                    "list": [
+                        {
+                            "@name": "VLAN_INTERFACE_LIST", 
+                            "ext:key-regex-configdb-to-yang": {
+                                "@value": "^(Vlan[a-zA-Z0-9_-]+)$"
+                            }, 
+                            "ext:key-regex-yang-to-configdb": {
+                                "@value": "<vlan_name>"
+                            }, 
+                            "key": {
+                                "@value": "vlan_name"
+                            }, 
+                            "description": {
+                                "text": "VLAN INTERFACE part of config_db.json with vrf"
+                            }, 
+                            "leaf": [
+                                {
+                                    "@name": "vlan_name", 
+                                    "type": {
+                                        "@name": "leafref", 
+                                        "path": {
+                                            "@value": "/vlan:sonic-vlan/vlan:VLAN/vlan:VLAN_LIST/vlan:vlan_name"
+                                        }
+                                    }
+                                }, 
+                                {
+                                    "@name": "vrf_name", 
+                                    "type": {
+                                        "@name": "string", 
+                                        "length": {
+                                            "@value": "3..255"
+                                        }, 
+                                        "pattern": {
+                                            "@value": "Vrf[a-zA-Z0-9_-]+"
+                                        }
+                                    }
+                                }
+                            ]
+                        }, 
+                        {
+                            "@name": "VLAN_INTERFACE_IPPREFIX_LIST", 
+                            "ext:key-regex-configdb-to-yang": {
+                                "@value": "^(Vlan[a-zA-Z0-9_-]+)|([a-fA-F0-9:./]+$)"
+                            }, 
+                            "ext:key-regex-yang-to-configdb": {
+                                "@value": "<vlan_name>|<ip-prefix>"
+                            }, 
+                            "key": {
+                                "@value": "vlan_name ip-prefix"
+                            }, 
+                            "leaf": [
+                                {
+                                    "@name": "vlan_name", 
+                                    "type": {
+                                        "@name": "leafref", 
+                                        "path": {
+                                            "@value": "/vlan:sonic-vlan/vlan:VLAN/vlan:VLAN_LIST/vlan:vlan_name"
+                                        }
+                                    }, 
+                                    "must": {
+                                        "@condition": "(current() = ../../VLAN_INTERFACE_LIST[vlan_name=current()]/vlan_name)", 
+                                        "error-message": {
+                                            "value": "Must condition not satisfied, Try adding Vlan<vlanid>: {}, Example: 'Vlan100': {}"
+                                        }
+                                    }
+                                }, 
+                                {
+                                    "@name": "ip-prefix", 
+                                    "type": {
+                                        "@name": "union", 
+                                        "type": [
+                                            {
+                                                "@name": "stypes:sonic-ip4-prefix"
+                                            }, 
+                                            {
+                                                "@name": "stypes:sonic-ip6-prefix"
+                                            }
+                                        ]
+                                    }
+                                }, 
+                                {
+                                    "@name": "scope", 
+                                    "type": {
+                                        "@name": "enumeration", 
+                                        "enum": [
+                                            {
+                                                "@name": "global"
+                                            }, 
+                                            {
+                                                "@name": "local"
+                                            }
+                                        ]
+                                    }
+                                }, 
+                                {
+                                    "@name": "family", 
+                                    "type": {
+                                        "@name": "stypes:ip-family"
+                                    }, 
+                                    "must": {
+                                        "@condition": "(contains(../ip-prefix, ':') and current()='IPv6') or         (contains(../ip-prefix, '.') and current()='IPv4')"
+                                    }
+                                }
+                            ]
+                        }
+                    ]
+                }, 
+                {
+                    "@name": "VLAN", 
+                    "description": {
+                        "text": "VLAN part of config_db.json"
+                    }, 
+                    "list": {
+                        "@name": "VLAN_LIST", 
+                        "ext:key-regex-configdb-to-yang": {
+                            "@value": "^(Vlan[a-zA-Z0-9_-]+)$"
+                        }, 
+                        "ext:key-regex-yang-to-configdb": {
+                            "@value": "<vlan_name>"
+                        }, 
+                        "key": {
+                            "@value": "vlan_name"
+                        }, 
+                        "leaf": [
+                            {
+                                "@name": "vlan_name", 
+                                "type": {
+                                    "@name": "string", 
+                                    "pattern": {
+                                        "@value": "Vlan([0-9]{1,3}|[1-3][0-9]{3}|[4][0][0-8][0-9]|[4][0][9][0-4])"
+                                    }
+                                }
+                            }, 
+                            {
+                                "@name": "vlanid", 
+                                "type": {
+                                    "@name": "uint16", 
+                                    "range": {
+                                        "@value": "1..4094"
+                                    }
+                                }
+                            }, 
+                            {
+                                "@name": "description", 
+                                "type": {
+                                    "@name": "string", 
+                                    "length": {
+                                        "@value": "1..255"
+                                    }
+                                }
+                            }, 
+                            {
+                                "@name": "mtu", 
+                                "type": {
+                                    "@name": "uint16", 
+                                    "range": {
+                                        "@value": "1..9216"
+                                    }
+                                }
+                            }, 
+                            {
+                                "@name": "admin_status", 
+                                "type": {
+                                    "@name": "stypes:admin_status"
+                                }
+                            }
+                        ], 
+                        "leaf-list": {
+                            "@name": "dhcp_servers", 
+                            "type": {
+                                "@name": "inet:ip-address"
+                            }
+                        }
+                    }
+                }, 
+                {
+                    "@name": "VLAN_MEMBER", 
+                    "description": {
+                        "text": "VLAN_MEMBER part of config_db.json"
+                    }, 
+                    "list": {
+                        "@name": "VLAN_MEMBER_LIST", 
+                        "ext:key-regex-configdb-to-yang": {
+                            "@value": "^(Vlan[a-zA-Z0-9-_]+)|(Ethernet[0-9]+)$"
+                        }, 
+                        "ext:key-regex-yang-to-configdb": {
+                            "@value": "<vlan_name>|<port>"
+                        }, 
+                        "key": {
+                            "@value": "vlan_name port"
+                        }, 
+                        "leaf": [
+                            {
+                                "@name": "vlan_name", 
+                                "type": {
+                                    "@name": "leafref", 
+                                    "path": {
+                                        "@value": "/vlan:sonic-vlan/vlan:VLAN/vlan:VLAN_LIST/vlan:vlan_name"
+                                    }
+                                }
+                            }, 
+                            {
+                                "@name": "port", 
+                                "type": {
+                                    "@name": "leafref", 
+                                    "path": {
+                                        "@value": "/port:sonic-port/port:PORT/port:PORT_LIST/port:port_name"
+                                    }
+                                }
+                            }, 
+                            {
+                                "@name": "tagging_mode", 
+                                "type": {
+                                    "@name": "stypes:vlan_tagging_mode"
+                                }, 
+                                "mandatory": {
+                                    "@value": "true"
+                                }
+                            }
+                        ]
+                    }
+                }
+            ]
+        }
+    }
+}

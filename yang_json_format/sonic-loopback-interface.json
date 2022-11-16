@@ -1,0 +1,156 @@
+{
+    "module": {
+        "@name": "sonic-loopback-interface", 
+        "@xmlns": "urn:ietf:params:xml:ns:yang:yin:1", 
+        "@xmlns:lointf": "http://github.com/Azure/sonic-loopback-interface", 
+        "@xmlns:stypes": "http://github.com/Azure/sonic-head", 
+        "@xmlns:ext": "http://github.com/Azure/sonic-extension", 
+        "yang-version": {
+            "@value": "1.1"
+        }, 
+        "namespace": {
+            "@uri": "http://github.com/Azure/sonic-loopback-interface"
+        }, 
+        "prefix": {
+            "@value": "lointf"
+        }, 
+        "import": [
+            {
+                "@module": "sonic-types", 
+                "prefix": {
+                    "@value": "stypes"
+                }, 
+                "revision-date": {
+                    "@date": "2019-07-01"
+                }
+            }, 
+            {
+                "@module": "sonic-extension", 
+                "prefix": {
+                    "@value": "ext"
+                }, 
+                "revision-date": {
+                    "@date": "2019-07-01"
+                }
+            }
+        ], 
+        "organization": {
+            "text": "Linkedin Corporation"
+        }, 
+        "contact": {
+            "text": "lnos_coders@linkedin.com"
+        }, 
+        "description": {
+            "text": "SONIC LOOPBACK INTERFACE"
+        }, 
+        "revision": {
+            "@date": "2020-02-05", 
+            "description": {
+                "text": "First Revision"
+            }
+        }, 
+        "container": {
+            "@name": "sonic-loopback-interface", 
+            "container": {
+                "@name": "LOOPBACK_INTERFACE", 
+                "list": [
+                    {
+                        "@name": "LOOPBACK_INTERFACE_LIST", 
+                        "ext:key-regex-configdb-to-yang": {
+                            "@value": "^([a-zA-Z0-9-_]+)$"
+                        }, 
+                        "ext:key-regex-yang-to-configdb": {
+                            "@value": "<loopback_interface_name>"
+                        }, 
+                        "key": {
+                            "@value": "loopback_interface_name"
+                        }, 
+                        "leaf": [
+                            {
+                                "@name": "loopback_interface_name", 
+                                "type": {
+                                    "@name": "string"
+                                }
+                            }, 
+                            {
+                                "@name": "vrf_name", 
+                                "type": {
+                                    "@name": "string", 
+                                    "length": {
+                                        "@value": "3..255"
+                                    }, 
+                                    "pattern": {
+                                        "@value": "Vrf[a-zA-Z0-9_-]+"
+                                    }
+                                }
+                            }
+                        ]
+                    }, 
+                    {
+                        "@name": "LOOPBACK_INTERFACE_IPPREFIX_LIST", 
+                        "ext:key-regex-configdb-to-yang": {
+                            "@value": "^([a-zA-Z0-9-_]+)|([a-fA-F0-9:./]+$)"
+                        }, 
+                        "ext:key-regex-yang-to-configdb": {
+                            "@value": "<loopback_interface_name>|<ip-prefix>"
+                        }, 
+                        "key": {
+                            "@value": "loopback_interface_name ip-prefix"
+                        }, 
+                        "leaf": [
+                            {
+                                "@name": "loopback_interface_name", 
+                                "type": {
+                                    "@name": "string"
+                                }, 
+                                "must": {
+                                    "@condition": "(current() = ../../LOOPBACK_INTERFACE_LIST[loopback_interface_name=current()]/loopback_interface_name)", 
+                                    "error-message": {
+                                        "value": "Must condition not satisfied, Try adding lo<>: {}, Example: 'lo1': {}"
+                                    }
+                                }
+                            }, 
+                            {
+                                "@name": "ip-prefix", 
+                                "type": {
+                                    "@name": "union", 
+                                    "type": [
+                                        {
+                                            "@name": "stypes:sonic-ip4-prefix"
+                                        }, 
+                                        {
+                                            "@name": "stypes:sonic-ip6-prefix"
+                                        }
+                                    ]
+                                }
+                            }, 
+                            {
+                                "@name": "scope", 
+                                "type": {
+                                    "@name": "enumeration", 
+                                    "enum": [
+                                        {
+                                            "@name": "global"
+                                        }, 
+                                        {
+                                            "@name": "local"
+                                        }
+                                    ]
+                                }
+                            }, 
+                            {
+                                "@name": "family", 
+                                "type": {
+                                    "@name": "stypes:ip-family"
+                                }, 
+                                "must": {
+                                    "@condition": "(contains(../ip-prefix, ':') and current()='IPv6') or (contains(../ip-prefix, '.') and current()='IPv4')"
+                                }
+                            }
+                        ]
+                    }
+                ]
+            }
+        }
+    }
+}

@@ -1,0 +1,45 @@
+{
+    "module": {
+        "@name": "sonic-extension", 
+        "@xmlns": "urn:ietf:params:xml:ns:yang:yin:1", 
+        "@xmlns:sonic-extension": "http://github.com/Azure/sonic-extension", 
+        "yang-version": {
+            "@value": "1.1"
+        }, 
+        "namespace": {
+            "@uri": "http://github.com/Azure/sonic-extension"
+        }, 
+        "prefix": {
+            "@value": "sonic-extension"
+        }, 
+        "description": {
+            "text": "Extension yang Module for SONiC OS"
+        }, 
+        "revision": {
+            "@date": "2019-07-01", 
+            "description": {
+                "text": "First Revision"
+            }
+        }, 
+        "extension": [
+            {
+                "@name": "key-regex-configdb-to-yang", 
+                "argument": {
+                    "@name": "value"
+                }, 
+                "description": {
+                    "text": "Key regex used to convert config DB keys to YANG Config"
+                }
+            }, 
+            {
+                "@name": "key-regex-yang-to-configdb", 
+                "argument": {
+                    "@name": "value"
+                }, 
+                "description": {
+                    "text": "Key regex used to convert config DB keys to YANG Config"
+                }
+            }
+        ]
+    }
+}

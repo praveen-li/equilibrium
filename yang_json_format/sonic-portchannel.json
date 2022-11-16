@@ -1,0 +1,157 @@
+{
+    "module": {
+        "@name": "sonic-portchannel", 
+        "@xmlns": "urn:ietf:params:xml:ns:yang:yin:1", 
+        "@xmlns:lag": "http://github.com/Azure/sonic-portchannel", 
+        "@xmlns:stypes": "http://github.com/Azure/sonic-head", 
+        "@xmlns:ext": "http://github.com/Azure/sonic-extension", 
+        "@xmlns:port": "http://github.com/Azure/sonic-port", 
+        "yang-version": {
+            "@value": "1.1"
+        }, 
+        "namespace": {
+            "@uri": "http://github.com/Azure/sonic-portchannel"
+        }, 
+        "prefix": {
+            "@value": "lag"
+        }, 
+        "import": [
+            {
+                "@module": "sonic-types", 
+                "prefix": {
+                    "@value": "stypes"
+                }, 
+                "revision-date": {
+                    "@date": "2019-07-01"
+                }
+            }, 
+            {
+                "@module": "sonic-extension", 
+                "prefix": {
+                    "@value": "ext"
+                }, 
+                "revision-date": {
+                    "@date": "2019-07-01"
+                }
+            }, 
+            {
+                "@module": "sonic-port", 
+                "prefix": {
+                    "@value": "port"
+                }, 
+                "revision-date": {
+                    "@date": "2019-07-01"
+                }
+            }
+        ], 
+        "organization": {
+            "text": "Linkedin Corporation"
+        }, 
+        "contact": {
+            "text": "lnos_coders@linkedin.com"
+        }, 
+        "description": {
+            "text": "PORTCHANNEL yang Module for SONiC OS"
+        }, 
+        "revision": {
+            "@date": "2019-07-01", 
+            "description": {
+                "text": "First Revision"
+            }
+        }, 
+        "container": {
+            "@name": "sonic-portchannel", 
+            "container": {
+                "@name": "PORTCHANNEL", 
+                "description": {
+                    "text": "PORTCHANNEL part of config_db.json"
+                }, 
+                "list": {
+                    "@name": "PORTCHANNEL_LIST", 
+                    "ext:key-regex-configdb-to-yang": {
+                        "@value": "^(PortChannel[0-9]{1,4})$"
+                    }, 
+                    "ext:key-regex-yang-to-configdb": {
+                        "@value": "<portchannel_name>"
+                    }, 
+                    "key": {
+                        "@value": "portchannel_name"
+                    }, 
+                    "leaf": [
+                        {
+                            "@name": "portchannel_name", 
+                            "type": {
+                                "@name": "string", 
+                                "length": {
+                                    "@value": "1..128"
+                                }, 
+                                "pattern": {
+                                    "@value": "PortChannel[0-9]{1,4}"
+                                }
+                            }
+                        }, 
+                        {
+                            "@name": "min_links", 
+                            "type": {
+                                "@name": "uint8", 
+                                "range": {
+                                    "@value": "1..128"
+                                }
+                            }
+                        }, 
+                        {
+                            "@name": "description", 
+                            "type": {
+                                "@name": "string", 
+                                "length": {
+                                    "@value": "1..255"
+                                }
+                            }
+                        }, 
+                        {
+                            "@name": "mtu", 
+                            "type": {
+                                "@name": "uint16", 
+                                "range": {
+                                    "@value": "1..9216"
+                                }
+                            }
+                        }, 
+                        {
+                            "@name": "admin_status", 
+                            "type": {
+                                "@name": "stypes:admin_status"
+                            }, 
+                            "mandatory": {
+                                "@value": "true"
+                            }
+                        }
+                    ], 
+                    "leaf-list": {
+                        "@name": "members", 
+                        "type": {
+                            "@name": "union", 
+                            "type": [
+                                {
+                                    "@name": "leafref", 
+                                    "path": {
+                                        "@value": "/port:sonic-port/port:PORT/port:PORT_LIST/port:port_name"
+                                    }
+                                }, 
+                                {
+                                    "@name": "string", 
+                                    "pattern": {
+                                        "@value": ""
+                                    }
+                                }
+                            ]
+                        }, 
+                        "default": {
+                            "@value": ""
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
