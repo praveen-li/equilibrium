@@ -68,4 +68,6 @@
 
 - [SONiC Developer`s overview Part1](https://www.youtube.com/watch?v=B1ccFSga15o)
 - [SONiC Developer`s overview Part2](https://www.youtube.com/watch?v=xE_svyAK9h0)
-- [SONiC Developer`s overview Part3](https://www.youtube.com/watch?v=xE_svyAK9h0)
+- [SONiC Developer`s overview Part 1 and Part 2 PDF](https://146a55aca6f00848c565-a7635525d40ac1c70300198708936b4e.ssl.cf1.rackcdn.com/images/f2d49367b3c6d39e758d7990ad3abeddace2b5f1.pdf)
+- [SONiC Developer`s overview Part 3](https://www.youtube.com/watch?v=Owl_9XVdOZs)
+- [SONiC Developer`s overview Part 3 PDF](https://146a55aca6f00848c565-a7635525d40ac1c70300198708936b4e.ssl.cf1.rackcdn.com/images/6976ecf9a7c7bdd2949f0d718c28e5dd3aa857dc.pdf)
